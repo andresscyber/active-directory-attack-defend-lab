@@ -4,7 +4,7 @@
 
 This project demonstrates the deployment of an Active Directory lab environment integrated with Sysmon and Wazuh for detection engineering, threat hunting, and security monitoring.
 
-The lab simulates common attacker behavior including account creation, privilege escalation, reconnaissance activity, failed logons, PowerShell execution, and malware-related events. Security telemetry is collected through Sysmon and forwarded to Wazuh where detections are analyzed and mapped to MITRE ATT&CK techniques. The project was designed to simulate real-world SOC analyst and detection engineering workflows, including alert triage, investigation, and MITRE ATT&CK mapping.
+The lab simulates common adversary techniques including account creation, privilege escalation, account discovery, failed authentication attempts, PowerShell execution, and malware-related activity. Security telemetry is collected through Sysmon and forwarded to Wazuh where detections are analyzed and mapped to MITRE ATT&CK techniques. The project was designed to simulate real-world SOC analyst and detection engineering workflows, including alert triage, investigation, and MITRE ATT&CK mapping.
 
 ---
 
@@ -123,6 +123,10 @@ Windows Server 2022 Domain Controller
 ### Administrator Group Detection
 
 ![Admin Detection](screenshots/06-detection-events/06-user-added-to-administrators-group-detection.png)
+
+### Discovery Activity Detection
+
+![Discovery Detection](screenshots/06-detection-events/07-discovery-activity-followup.png)
 
 ---
 
