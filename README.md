@@ -2,277 +2,192 @@
 
 ## Overview
 
-This project simulates an enterprise Active Directory environment and demonstrates how common attacker behavior can be detected using Wazuh, Sysmon, Windows Security Events, custom detection rules, and MITRE ATT&CK mapping.
+This project demonstrates the deployment of an Active Directory lab environment integrated with Sysmon and Wazuh for detection engineering, threat hunting, and security monitoring.
 
-The lab includes:
+The lab simulates common attacker behavior including account creation, privilege escalation, reconnaissance activity, failed logons, PowerShell execution, and malware-related events. Security telemetry is collected through Sysmon and forwarded to Wazuh where detections are analyzed and mapped to MITRE ATT&CK techniques.
 
-- Windows Server 2022 Domain Controller
-- Windows 11 Domain-Joined Workstation
-- Active Directory Domain Services
-- Organizational Units and Security Groups
-- Sysmon Endpoint Telemetry
-- Wazuh SIEM Platform
-- Custom Detection Rules
-- MITRE ATT&CK Mapping
-- Threat Hunting Investigations
+---
+
+## Lab Objectives
+
+- Build an Active Directory environment
+- Deploy a Windows Server 2022 Domain Controller
+- Join a Windows 11 workstation to the domain
+- Install and configure Sysmon
+- Install and configure the Wazuh agent
+- Simulate attacker techniques
+- Generate security events
+- Perform threat hunting investigations
+- Map detections to MITRE ATT&CK
 
 ---
 
 ## Technologies Used
 
-- Active Directory Domain Services (AD DS)
 - Windows Server 2022
-- Windows 11 Enterprise
-- Wazuh SIEM
+- Windows 11
+- Active Directory Domain Services
 - Sysmon
-- VMware Workstation
+- Wazuh
 - PowerShell
-- Windows Event Viewer
-- MITRE ATT&CK Framework
+- MITRE ATT&CK
+- VMware Workstation
 
 ---
 
-# 1. Lab Environment Setup
+## Lab Architecture
 
-### Project Structure
-
-![Project Structure](screenshots/01-lab-setup/01-project-folder-structure.png)
-
----
-
-# 2. Domain Controller Deployment
-
-### Windows Server Installation
-
-![Server Install](screenshots/02-domain-controller/01-server2022-install-options.png)
-
-### Server Installation Progress
-
-![Install Progress](screenshots/02-domain-controller/02-server2022-install-progress.png)
-
-### Server Desktop
-
-![Desktop](screenshots/02-domain-controller/03-server2022-desktop.png)
-
-### Domain Controller Renamed
-
-![Rename Server](screenshots/02-domain-controller/04-server-renamed-ad-dc01.png)
-
-### Static IP Configuration
-
-![Static IP](screenshots/02-domain-controller/06-static-ip-configuration.png)
-
-### Active Directory Installation
-
-![AD DS](screenshots/02-domain-controller/08-add-ad-ds-role.png)
-
-### Domain Promotion
-
-![Promotion](screenshots/02-domain-controller/09-ad-ds-installed-promotion-required.png)
-
-### New Forest Creation
-
-![Forest](screenshots/02-domain-controller/10-new-forest-corp-local.png)
-
-### Active Directory Users and Computers
-
-![AD Users](screenshots/02-domain-controller/18-active-directory-users-computers.png)
-
-### Organizational Units Created
-
-![OU Creation](screenshots/02-domain-controller/19-organizational-units-created.png)
-
-### Security Groups Created
-
-![Security Groups](screenshots/02-domain-controller/20-security-groups-created.png)
-
-### Domain Users Created
-
-![Domain Users](screenshots/02-domain-controller/21-domain-users-created.png)
+```text
+Windows Server 2022 Domain Controller
+                │
+                ▼
+        Active Directory
+                │
+                ▼
+   Windows 11 Domain Workstation
+                │
+                ▼
+              Sysmon
+                │
+                ▼
+           Wazuh Agent
+                │
+                ▼
+          Wazuh Manager
+```
 
 ---
 
-# 3. Windows 11 Domain Workstation
+## Active Directory Deployment
 
-### DNS Configuration
+### Domain Controller Setup
 
-![DNS](screenshots/03-domain-workstation/05-win11-dns-configured.png)
+![Domain Controller](screenshots/02-domain-controller/21-domain-users-created.png)
 
-### Domain Join Success
+### Domain Workstation Joined to Domain
 
-![Domain Join](screenshots/03-domain-workstation/07-domain-join-success.png)
-
-### Domain User Login
-
-![Domain Login](screenshots/03-domain-workstation/09-domain-user-login.png)
-
-### Domain Membership Verification
-
-![Membership](screenshots/03-domain-workstation/10-domain-membership-verification.png)
+![Workstation](screenshots/03-domain-workstation/10-domain-membership-verification.png)
 
 ---
 
-# 4. Sysmon and Wazuh Deployment
+## Sysmon and Wazuh Deployment
 
-### Sysmon Downloaded
+### Sysmon Installation
 
-![Sysmon Download](screenshots/04-sysmon-wazuh/02-sysmon-config-downloaded.png)
-
-### Sysmon Installed
-
-![Sysmon Installed](screenshots/04-sysmon-wazuh/03-sysmon-installed.png)
-
-### Sysmon Configuration Verified
-
-![Sysmon Verified](screenshots/04-sysmon-wazuh/04-sysmon-configuration-verified.png)
-
-### Sysmon Operational Log
-
-![Sysmon Log](screenshots/04-sysmon-wazuh/05-sysmon-operational-log.png)
-
-### Wazuh Agent Service Running
-
-![Wazuh Agent Service](screenshots/04-sysmon-wazuh/06-wazuh-agent-service-running.png)
+![Sysmon](screenshots/04-sysmon-wazuh/03-sysmon-installed.png)
 
 ### Wazuh Agent Registration
 
 ![Wazuh Agent](screenshots/04-sysmon-wazuh/07-win11-agent-active-in-wazuh.png)
 
-### Sysmon Events Collected
+### Sysmon Operational Events
 
 ![Sysmon Events](screenshots/04-sysmon-wazuh/08-sysmon-events-operational-log.png)
 
 ---
 
-# 5. Attack Simulation
+## Attack Simulations
 
-## Encoded PowerShell Execution
+### Encoded PowerShell Execution
 
 ![PowerShell](screenshots/05-attack-simulation/01-encoded-powershell-execution.png)
 
-### Detection
+### User Account Creation
 
-Custom Wazuh detection rule generated an alert for suspicious PowerShell activity.
+![User Creation](screenshots/05-attack-simulation/02-user-account-created.png)
 
----
+### Failed Logon Activity
 
-## User Account Creation
+![Failed Logon](screenshots/05-attack-simulation/04-failed-logon-attempts.png)
 
-![User Created](screenshots/05-attack-simulation/02-user-account-created.png)
+### Privilege Escalation
 
-### Detection
-
-Custom Wazuh rule generated an alert when a new user account was created.
+![Privilege Escalation](screenshots/05-attack-simulation/08-eviluser-added-to-admin-group.png)
 
 ---
 
-## Discovery Activity
+## Detection Events
 
-![Recon](screenshots/05-attack-simulation/03-reconnaissance-commands.png)
+### User Account Creation Detection
 
-### Detection
+![User Creation Detection](screenshots/06-detection-events/02-user-account-creation-detection.png)
 
-Wazuh detected account discovery activity and mapped the behavior to MITRE ATT&CK Discovery techniques.
+### Failed Logon Detection
 
----
+![Failed Logon Detection](screenshots/06-detection-events/04-failed-logon-detection.png)
 
-## Failed Logon Attempts
+### Malware Drop Detection
 
-![Failed Logons](screenshots/05-attack-simulation/04-failed-logon-attempts.png)
+![Malware Detection](screenshots/06-detection-events/05-malware-drop-detection.png)
 
-### Detection
+### Administrator Group Detection
 
-Multiple failed authentication attempts generated Windows Security Event 4625 alerts.
-
----
-
-## User Added to Administrators Group
-
-![Admin Group](screenshots/05-attack-simulation/08-eviluser-added-to-admin-group.png)
-
-### Detection
-
-Custom Wazuh detection identified privilege escalation activity.
+![Admin Detection](screenshots/06-detection-events/06-user-added-to-administrators-group-detection.png)
 
 ---
 
-# 6. Threat Hunting Investigation
+## Threat Hunting
 
 ### Failed Logon Investigation
 
-![Failed Logons Search](screenshots/07-threat-hunting/01-search-for-failed-logons.png)
+![Threat Hunting](screenshots/07-threat-hunting/01-search-for-failed-logons.png)
 
-### User Account Creation Investigation
+### User Account Investigation
 
-![User Creation Hunt](screenshots/07-threat-hunting/02-investigating-eviluser-account.png)
+![Threat Hunting](screenshots/07-threat-hunting/02-investigating-eviluser-account.png)
 
-### Privilege Escalation Investigation
+### Malware Alert Investigation
 
-![Admin Group Hunt](screenshots/07-threat-hunting/03-investigating-admin-group-changes.png)
-
-### Discovery Activity Investigation
-
-![Discovery Hunt](screenshots/07-threat-hunting/04-hunting-discovery-activity.png)
-
-### PowerShell Investigation
-
-![PowerShell Hunt](screenshots/07-threat-hunting/05-hunting-powershell-activity.png)
-
-### Malware Drop Investigation
-
-![Malware Hunt](screenshots/07-threat-hunting/06-hunting-malware-drop-alerts.png)
+![Threat Hunting](screenshots/07-threat-hunting/06-hunting-malware-drop-alerts.png)
 
 ---
 
-# 7. MITRE ATT&CK Mapping
+## MITRE ATT&CK Mapping
 
-### MITRE ATT&CK Overview
+### ATT&CK Overview
 
-![MITRE Dashboard](screenshots/08-mitre-mapping/01-mitre-attack-overview.png)
+![MITRE](screenshots/08-mitre-mapping/01-mitre-attack-overview.png)
 
 ### User Account Creation Mapping
 
 ![MITRE Mapping](screenshots/08-mitre-mapping/02-user-account-created-mitre-mapping.png)
 
-### Techniques Demonstrated
+Mapped Technique:
 
-| Activity | MITRE Technique |
-|-----------|-----------|
-| User Creation | T1136 |
-| Account Discovery | T1087 |
-| PowerShell Execution | T1059.001 |
-| Privilege Escalation | T1098 |
-| Failed Logons | Credential Access |
-| Malware Drop | Defense Evasion |
+- T1136 – Create Account
 
 ---
 
-# 8. Detection Engineering Outcomes
+## Wazuh Dashboard
 
-The lab successfully demonstrated:
+### Platform Overview
 
-- Active Directory deployment and administration
-- Endpoint telemetry collection using Sysmon
-- Centralized log collection with Wazuh
-- Custom detection rule development
-- Windows Security Event monitoring
-- Threat hunting investigations
-- MITRE ATT&CK mapping
-- Detection engineering workflows
+![Dashboard](screenshots/09-final-dashboard/01-wazuh-platform-overview.png)
+
+### Detection Engineering Alert Summary
+
+![Detection Summary](screenshots/09-final-dashboard/02-detection-engineering-alert-summary.png)
 
 ---
 
-# 9. Final Dashboard
+## Skills Demonstrated
 
-![Wazuh Dashboard](screenshots/09-final-dashboard/01-wazuh-overview-dashboard.png)
+- Active Directory Administration
+- Windows Security Monitoring
+- Detection Engineering
+- Threat Hunting
+- Security Event Analysis
+- Sysmon Configuration
+- Wazuh Administration
+- MITRE ATT&CK Mapping
+- Security Investigations
+- Log Analysis
 
 ---
 
 ## Resume Highlights
 
-- Built enterprise Active Directory lab using Windows Server 2022 and Windows 11.
-- Deployed Sysmon and Wazuh for endpoint visibility and centralized log analysis.
-- Developed custom Wazuh detection rules for user creation and privilege escalation.
-- Performed threat hunting investigations using Windows Security Events and Sysmon telemetry.
-- Mapped detections to MITRE ATT&CK techniques.
-- Simulated attacker activity including reconnaissance, PowerShell execution, credential abuse, and privilege escalation.
+- Built an Active Directory attack and defense lab using Windows Server 2022, Windows 11, Sysmon, and Wazuh.
+- Developed custom detections for user creation and administrator group membership changes.
+- Performed threat hunting investigations using Wazuh event telemetry and Sysmon logs.
+- Mapped detections to MITRE ATT&CK techniques to improve detection coverage and analysis.
