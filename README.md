@@ -71,7 +71,7 @@ Wazuh Manager
 
 ### Wazuh Agent Registration
 
-![Wazuh Agent](screenshots/04-sysmon-wazuh/08-win11-agent-active-in-wazuh.png)
+![Wazuh Agent](screenshots/04-sysmon-wazuh/07-win11-agent-active-in-wazuh.png)
 
 ---
 
