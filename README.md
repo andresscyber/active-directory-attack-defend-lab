@@ -4,7 +4,7 @@
 
 This project demonstrates the deployment of an Active Directory lab environment integrated with Sysmon and Wazuh for detection engineering, threat hunting, and security monitoring.
 
-The lab simulates common attacker behavior including account creation, privilege escalation, reconnaissance activity, failed logons, PowerShell execution, and malware-related events. Security telemetry is collected through Sysmon and forwarded to Wazuh where detections are analyzed and mapped to MITRE ATT&CK techniques.
+The lab simulates common attacker behavior including account creation, privilege escalation, reconnaissance activity, failed logons, PowerShell execution, and malware-related events. Security telemetry is collected through Sysmon and forwarded to Wazuh where detections are analyzed and mapped to MITRE ATT&CK techniques. The project was designed to simulate real-world SOC analyst and detection engineering workflows, including alert triage, investigation, and MITRE ATT&CK mapping.
 
 ---
 
@@ -191,3 +191,4 @@ Mapped Technique:
 - Developed custom detections for user creation and administrator group membership changes.
 - Performed threat hunting investigations using Wazuh event telemetry and Sysmon logs.
 - Mapped detections to MITRE ATT&CK techniques to improve detection coverage and analysis.
+- Built custom Wazuh detection rules to identify account creation and administrator group membership changes in a Windows Active Directory environment.
