@@ -162,7 +162,7 @@ Mapped Technique:
 
 ### Platform Overview
 
-![Dashboard](screenshots/09-final-dashboard/01-wazuh-platform-overview.png)
+![Dashboard](screenshots/09-final-dashboard/01-wazuh-overview-dashboard.png)
 
 ### Detection Engineering Alert Summary
 
