@@ -149,7 +149,13 @@ Mapped Technique:
 
 ## Wazuh Dashboard
 
-![Dashboard](screenshots/09-final-dashboard/01-wazuh-overview-dashboard.png)
+### Platform Overview
+
+![Platform Overview](screenshots/09-final-dashboard/01-wazuh-overview-dashboard.png)
+
+### Detection Engineering Alert Summary
+
+![Detection Summary](screenshots/09-final-dashboard/02-detection-engineering-alert-summary.png)
 
 ---
 
